@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imersão Claude pra Creator · tudo num lugar só</title>
+<meta name="description" content="Todos os links da Imersão Claude pra Creator: apostilas, modelos de portfólio, prompts e painel.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧡</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#C8441A; --red-dark:#A3360F; --ink:#1B1B1B; --cream:#FFF8F2; --cream2:#F3EFE9;
+  --line:#E8E0D8; --muted:#5A5550; --white:#fff; --soft:#FFF0E8; --butter:#FEF7CF;
+  --green:#1C7A4E; --green-soft:#E8F5EE;
+  --fh:'Montserrat',Arial,sans-serif; --fb:'DM Sans',Arial,sans-serif; --fm:'DM Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--ink);font-family:var(--fb);line-height:1.5;-webkit-font-smoothing:antialiased}
+#grao{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.capa{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:54px 22px 90px}
+
+/* ---------- topo ---------- */
+.selo{display:inline-block;background:var(--ink);color:var(--white);font-family:var(--fm);font-size:11.5px;
+  letter-spacing:.18em;text-transform:uppercase;padding:8px 14px;border-radius:100px}
+h1{font-family:var(--fh);font-weight:900;font-size:clamp(34px,6vw,62px);line-height:1.04;letter-spacing:-.025em;margin:20px 0 14px}
+h1 em{font-style:normal;color:var(--red)}
+.sub{font-size:clamp(16px,2vw,20px);color:var(--muted);max-width:52ch}
+.datas{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.datas span{font-family:var(--fh);font-weight:700;font-size:13px;border:2px solid var(--red);color:var(--red);
+  border-radius:100px;padding:6px 14px}
+.datas span.fill{background:var(--red);color:var(--white)}
+
+/* ---------- blocos ---------- */
+.bloco{margin-top:52px}
+.bloco > h2{font-family:var(--fh);font-weight:800;font-size:clamp(20px,2.6vw,27px);letter-spacing:-.01em;
+  display:flex;align-items:center;gap:11px;margin-bottom:6px}
+.bloco > h2 i{font-style:normal;font-size:1.15em}
+.bloco > p.res{color:var(--muted);font-size:15.5px;margin-bottom:20px}
+.grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:16px}
+
+.cartao{display:block;text-decoration:none;color:inherit;background:var(--white);border:1px solid var(--line);
+  border-radius:12px;padding:22px;box-shadow:0 3px 0 rgba(27,27,27,.07);transition:transform .16s,box-shadow .16s;position:relative;overflow:hidden}
+.cartao:hover{transform:translateY(-3px);box-shadow:0 7px 0 rgba(27,27,27,.1)}
+.cartao .em{font-size:32px;line-height:1;display:block;margin-bottom:12px}
+.cartao h3{font-family:var(--fh);font-weight:800;font-size:19px;letter-spacing:-.01em;margin-bottom:6px}
+.cartao p{font-size:14.8px;color:var(--muted)}
+.cartao .ir{font-family:var(--fh);font-weight:700;font-size:13px;color:var(--red);margin-top:14px;display:inline-block}
+.cartao .rot{font-family:var(--fm);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:9px}
+.cartao.grande{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
+.cartao.grande .em{font-size:44px;margin:0}
+.cartao.grande .ir{margin-top:9px}
+.cartao.principal{background:var(--red);border-color:var(--red);color:var(--white);box-shadow:0 3px 0 var(--red-dark)}
+.cartao.principal p{color:rgba(255,255,255,.88)}
+.cartao.principal .ir,.cartao.principal .rot{color:var(--white)}
+.cartao.principal:hover{box-shadow:0 7px 0 var(--red-dark)}
+.cartao.verde{background:var(--green-soft);border-color:#CDE7D8}
+.cartao.verde .ir,.cartao.verde .rot{color:var(--green)}
+
+/* ---------- contas ---------- */
+.contas{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.conta{background:var(--butter);border:1px solid #F0E4A8;border-radius:10px;padding:15px 16px}
+.conta b{font-family:var(--fh);font-size:15px;display:flex;align-items:center;gap:8px}
+.conta small{display:block;color:#6A6248;font-size:13px;margin-top:5px;line-height:1.4}
+
+/* ---------- agenda ---------- */
+.dias{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.dia{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:22px;box-shadow:0 3px 0 rgba(27,27,27,.06)}
+.dia h3{font-family:var(--fh);font-weight:800;font-size:17px;margin-bottom:4px}
+.dia .qd{font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+.dia ul{list-style:none;display:grid;gap:10px}
+.dia li{display:grid;grid-template-columns:58px 1fr;gap:10px;align-items:baseline;font-size:14.8px;
+  padding-bottom:10px;border-bottom:1px solid var(--line)}
+.dia li:last-child{border:0;padding-bottom:0}
+.dia li b{font-family:var(--fm);font-size:13px;color:var(--red);font-weight:400}
+
+/* ---------- rodape ---------- */
+.ajuda{margin-top:52px;background:var(--ink);color:var(--white);border-radius:14px;padding:30px 26px}
+.ajuda h2{font-family:var(--fh);font-weight:800;font-size:22px;margin-bottom:8px}
+.ajuda p{color:rgba(255,255,255,.8);font-size:15.5px;max-width:56ch}
+.ajuda a{color:var(--butter)}
+.rodape{margin-top:34px;text-align:center;color:var(--muted);font-family:var(--fm);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+
+/* ---------- porteira ---------- */
+#portao{position:fixed;inset:0;z-index:50;background:var(--red);display:flex;align-items:center;justify-content:center;padding:22px;transition:opacity .35s,visibility .35s}
+#portao.fora{opacity:0;visibility:hidden}
+.pcaixa{background:var(--cream);border-radius:16px;padding:34px 30px;max-width:420px;width:100%;box-shadow:0 6px 0 rgba(0,0,0,.18)}
+.pcaixa .psel{font-family:var(--fm);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
+.pcaixa h2{font-family:var(--fh);font-weight:900;font-size:28px;margin:10px 0 8px;letter-spacing:-.02em}
+.pcaixa p{color:var(--muted);font-size:15px}
+.pcaixa form{display:flex;gap:8px;margin-top:18px}
+.pcaixa input{flex:1;border:2px solid var(--line);border-radius:9px;padding:13px 14px;font-family:var(--fb);font-size:16px;background:var(--white)}
+.pcaixa input:focus{outline:0;border-color:var(--red)}
+.pcaixa button{background:var(--red);color:#fff;border:0;border-radius:9px;padding:0 20px;font-family:var(--fh);font-weight:700;font-size:15px;cursor:pointer}
+.pcaixa button:hover{background:var(--red-dark)}
+#perro{color:var(--red);font-size:14px;margin-top:10px;display:none}
+#perro.on{display:block}
+.pdica{margin-top:16px;font-size:13.5px;color:var(--muted)}
+
+@media (max-width:720px){
+  .dias{grid-template-columns:1fr}
+  .cartao.grande{grid-template-columns:1fr}
+  .capa{padding:34px 18px 64px}
+}
+</style>
+</head>
+<body>
+<div id="grao"></div>
+
+<div id="portao">
+  <div class="pcaixa">
+    <div class="psel">Imersão Claude pra Creator</div>
+    <h2>Tudo da imersão</h2>
+    <p>Apostilas, modelos e prompts dos dois dias. Digite a palavra que eu falei na aula.</p>
+    <form id="pform">
+      <input id="psenha" type="text" autocomplete="off" placeholder="a palavra da aula" aria-label="palavra da aula">
+      <button type="submit">Entrar</button>
+    </form>
+    <p id="perro">Não é essa. Tenta de novo 💛</p>
+    <p class="pdica">Esqueceu? Me chama no direct: <strong>@eilaradam</strong></p>
+  </div>
+</div>
+
+<main class="capa">
+  <div class="selo">Imersão Claude pra Creator · Turma 2</div>
+  <h1>Tudo da imersão<br><em>num lugar só.</em></h1>
+  <p class="sub">Salva esse link nos favoritos. É por aqui que você volta pra refazer qualquer passo, hoje, amanhã ou daqui a três meses.</p>
+  <div class="datas"><span>19 de setembro</span><span>20 de setembro</span><span class="fill">9h às 17h</span></div>
+
+  <section class="bloco">
+    <h2><i>🏗️</i> Dia 1 · Construir</h2>
+    <p class="res">O portfólio e o admin no ar, num endereço seu.</p>
+    <div class="grade">
+      <a class="cartao grande principal" href="https://eilaradam.github.io/guia-imersao/">
+        <span class="em">📘</span>
+        <span>
+          <span class="rot">Comece por aqui</span>
+          <h3>Apostila do Dia 1</h3>
+          <p>As 16 etapas do dia, com os prompts prontos pra copiar e as caixinhas que salvam o seu progresso.</p>
+          <span class="ir">Abrir a apostila →</span>
+        </span>
+      </a>
+      <a class="cartao" href="https://eilaradam.github.io/portfolios-imersao/">
+        <span class="em">🎨</span>
+        <h3>Escolha seu portfólio</h3>
+        <p>44 modelos prontos. Você escolhe o seu, preenche os campos e o prompt sai montado.</p>
+        <span class="ir">Ver os modelos →</span>
+      </a>
+      <a class="cartao" href="https://eilaradam.github.io/admin-imersao/">
+        <span class="em">🔑</span>
+        <h3>O prompt do admin</h3>
+        <p>Preenche os 7 campos com os seus dados e copia o prompt que constrói a sua página de admin.</p>
+        <span class="ir">Abrir o prompt →</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="bloco">
+    <h2><i>🚀</i> Dia 2 · Prospectar</h2>
+    <p class="res">Encontrar marcas de verdade, escrever a proposta e enviar.</p>
+    <div class="grade">
+      <a class="cartao grande principal" href="https://eilaradam.github.io/guia-imersao/dia2/">
+        <span class="em">📙</span>
+        <span>
+          <span class="rot">A apostila de amanhã</span>
+          <h3>Apostila do Dia 2</h3>
+          <p>Os 4 caminhos pra encontrar marca, a base de marcas no seu admin, a copy da proposta e o disparo de e-mail. 16 etapas, 11 prompts.</p>
+          <span class="ir">Abrir a apostila →</span>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <section class="bloco">
+    <h2><i>🎁</i> Bônus</h2>
+    <p class="res">Pra usar depois da imersão, na sua rotina.</p>
+    <div class="grade">
+      <a class="cartao verde" href="https://eilaradam.github.io/painel-da-creator/">
+        <span class="em">🗂️</span>
+        <span class="rot">Seu painel</span>
+        <h3>Painel da Creator</h3>
+        <p>Marcas, propostas, entregas, financeiro, conteúdo e a checklist do portfólio. Abre e já é seu, sem login.</p>
+        <span class="ir">Abrir o painel →</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="bloco">
+    <h2><i>✅</i> O que ter em mãos</h2>
+    <p class="res">Cria essas contas antes de a aula começar. É o que faz você não perder a primeira hora.</p>
+    <div class="contas">
+      <div class="conta"><b>🤖 Claude</b><small>Conta feita e o aplicativo aberto no computador.</small></div>
+      <div class="conta"><b>🌐 Chrome</b><small>Navegador instalado e você logada nele.</small></div>
+      <div class="conta"><b>🐙 GitHub</b><small>Conta criada e confirmada no e-mail. É onde o site mora.</small></div>
+      <div class="conta"><b>🗄️ Supabase</b><small>Conta criada. É o banco de dados do seu admin.</small></div>
+      <div class="conta"><b>📮 Resend</b><small>Só no dia 2. É o carteiro que manda os e-mails.</small></div>
+    </div>
+  </section>
+
+  <section class="bloco">
+    <h2><i>🕘</i> Como são os dois dias</h2>
+    <div class="dias">
+      <div class="dia">
+        <h3>Dia 1 · Construir</h3>
+        <div class="qd">19 de setembro</div>
+        <ul>
+          <li><b>9h</b><span>O que é o Claude e como ele trabalha pra você</span></li>
+          <li><b>10h</b><span>Começa o portfólio, e eu explico a estrutura</span></li>
+          <li><b>11h</b><span>Um endereço seu, de graça</span></li>
+          <li><b>14h</b><span>A página de admin: Supabase, login e as abas</span></li>
+          <li><b>16h</b><span>Admin pronto e ligado ao portfólio</span></li>
+        </ul>
+      </div>
+      <div class="dia">
+        <h3>Dia 2 · Prospectar</h3>
+        <div class="qd">20 de setembro</div>
+        <ul>
+          <li><b>9h30</b><span>Claude no Chrome: a pesquisa feita por ele</span></li>
+          <li><b>10h20</b><span>Os 4 caminhos pra encontrar marca</span></li>
+          <li><b>11h45</b><span>Captação ao vivo: 30 marcas na sua lista</span></li>
+          <li><b>14h30</b><span>A copy da proposta, na sua voz</span></li>
+          <li><b>16h</b><span>O primeiro envio em massa, de verdade</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="ajuda">
+    <h2>Travou? Fala na hora 💛</h2>
+    <p>No grupo do WhatsApp, com o print e dizendo em que etapa você está. Está tudo gravado, as apostilas ficam no ar e o grupo continua depois da imersão. Ninguém fica pra trás.</p>
+    <p style="margin-top:10px">Ou me chama no direct: <a href="https://instagram.com/eilaradam">@eilaradam</a></p>
+  </section>
+
+  <p class="rodape">@eilaradam · Imersão Claude pra Creator</p>
+</main>
+
+<script>
+(function(){
+  var portao = document.getElementById('portao');
+  function liberado(){ try{ return localStorage.getItem('imersaoOk') === '1'; }catch(e){ return false; } }
+  function abrir(){ portao.classList.add('fora'); }
+  if(liberado()) abrir();
+  document.getElementById('pform').addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var campo = document.getElementById('psenha');
+    var v = campo.value.trim().toLowerCase().replace(/\s+/g,'');
+    if(v === 'imersao' || v === 'imersao2' || v === 'turma2'){
+      try{ localStorage.setItem('imersaoOk','1'); }catch(e){}
+      document.getElementById('perro').classList.remove('on');
+      abrir();
+    } else {
+      document.getElementById('perro').classList.add('on');
+      campo.select();
+    }
+  });
+  setTimeout(function(){ if(!liberado()){ try{ document.getElementById('psenha').focus(); }catch(e){} } }, 200);
+})();
+</script>
+</body>
+</html>
