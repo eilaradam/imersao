@@ -68,3 +68,64 @@ $fn$;
 
 revoke all on function public.admin_imersao_pesquisa() from public;
 grant execute on function public.admin_imersao_pesquisa() to authenticated;
+
+-- =====================================================================
+-- Perguntas extras (18/09, a pedido dela): nicho, computador,
+-- portfólio de hoje, onde ela trava e o medo dos dois dias.
+-- A função ganha os campos novos COM DEFAULT, então uma página antiga
+-- em cache continua gravando sem erro.
+-- =====================================================================
+
+alter table public.imersao_pesquisa add column if not exists nicho      text;
+alter table public.imersao_pesquisa add column if not exists computador text;
+alter table public.imersao_pesquisa add column if not exists portfolio  text;
+alter table public.imersao_pesquisa add column if not exists trava      text;
+alter table public.imersao_pesquisa add column if not exists medo       text;
+
+drop function if exists public.imersao_salvar_pesquisa(text,text,text,text,jsonb,text,text,text,text);
+
+create or replace function public.imersao_salvar_pesquisa(
+  p_arroba text, p_nome text, p_momento text, p_fechados text,
+  p_dificuldades jsonb, p_aprender text, p_duvida text, p_ia text, p_extra text,
+  p_nicho text default null, p_computador text default null, p_portfolio text default null,
+  p_trava text default null, p_medo text default null
+) returns void language plpgsql security definer set search_path = public as $fn$
+declare a text;
+begin
+  a := lower(regexp_replace(coalesce(p_arroba,''), '[^a-zA-Z0-9._]', '', 'g'));
+  if a = '' or length(a) > 40 then return; end if;
+  insert into imersao_pesquisa (arroba, nome, momento, fechados, dificuldades, aprender, duvida, ia, extra,
+                                nicho, computador, portfolio, trava, medo)
+  values (a,
+          left(nullif(trim(coalesce(p_nome,'')),''),80),
+          left(coalesce(p_momento,''),40),
+          left(coalesce(p_fechados,''),40),
+          coalesce(p_dificuldades,'[]'::jsonb),
+          left(coalesce(p_aprender,''),700),
+          left(coalesce(p_duvida,''),700),
+          left(coalesce(p_ia,''),40),
+          left(coalesce(p_extra,''),700),
+          left(coalesce(p_nicho,''),120),
+          left(coalesce(p_computador,''),60),
+          left(coalesce(p_portfolio,''),60),
+          left(coalesce(p_trava,''),700),
+          left(coalesce(p_medo,''),700))
+  on conflict (arroba) do update set
+    nome         = coalesce(excluded.nome, imersao_pesquisa.nome),
+    momento      = excluded.momento,
+    fechados     = excluded.fechados,
+    dificuldades = excluded.dificuldades,
+    aprender     = excluded.aprender,
+    duvida       = excluded.duvida,
+    ia           = excluded.ia,
+    extra        = excluded.extra,
+    nicho        = excluded.nicho,
+    computador   = excluded.computador,
+    portfolio    = excluded.portfolio,
+    trava        = excluded.trava,
+    medo         = excluded.medo,
+    visto_em     = now();
+end $fn$;
+
+revoke all on function public.imersao_salvar_pesquisa(text,text,text,text,jsonb,text,text,text,text,text,text,text,text,text) from public;
+grant execute on function public.imersao_salvar_pesquisa(text,text,text,text,jsonb,text,text,text,text,text,text,text,text,text) to anon, authenticated;

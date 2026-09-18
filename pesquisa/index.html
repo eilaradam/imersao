@@ -83,18 +83,27 @@ textarea.alta{min-height:132px}
         <input type="text" id="nome" placeholder="Seu nome" autocomplete="name">
         <input type="text" id="arroba" placeholder="@ do seu Instagram" autocomplete="off">
       </div>
+      <input type="text" id="nicho" placeholder="Seu nicho (casa, beleza, pet, comida...)" autocomplete="off" style="margin-top:10px">
     </div>
 
     <div class="p">
-      <label class="q" for="aprender">O que você está mais ansiosa e quer aprender nesses dois dias?</label>
-      <span class="aj livre">Escreve do jeito que vier na cabeça, e o quanto você quiser. Se você comprou pensando em alguma coisa específica, me conta aqui.</span>
-      <textarea id="aprender" class="alta" placeholder="Eu comprei a imersão pensando em..."></textarea>
+      <span class="q">Você vai acompanhar de computador?</span>
+      <span class="aj">Isso é importante: a gente vai construir o seu site ao vivo, e isso é feito no computador.</span>
+      <div class="opcoes" data-campo="computador" data-uma="1">
+        <button type="button" class="op" data-v="Tenho o meu"><span class="em">💻</span>Tenho o meu</button>
+        <button type="button" class="op" data-v="Vou usar emprestado"><span class="em">🤝</span>Vou usar emprestado</button>
+        <button type="button" class="op" data-v="Só tenho celular"><span class="em">📱</span>Só tenho celular</button>
+      </div>
     </div>
 
     <div class="p">
-      <label class="q" for="duvida">Qual a sua maior dúvida pra amanhã?</label>
-      <span class="aj livre">Pode ser sobre qualquer coisa. As que mais aparecerem eu respondo ao vivo, na aula.</span>
-      <textarea id="duvida" class="alta" placeholder="Minha maior dúvida é..."></textarea>
+      <span class="q">Você já tem portfólio hoje?</span>
+      <span class="aj">Pra eu saber de onde cada uma está partindo.</span>
+      <div class="opcoes" data-campo="portfolio" data-uma="1">
+        <button type="button" class="op" data-v="Não tenho nenhum">Não tenho nenhum</button>
+        <button type="button" class="op" data-v="Tenho no Canva ou em PDF">Tenho no Canva ou em PDF</button>
+        <button type="button" class="op" data-v="Já tenho um site">Já tenho um site</button>
+      </div>
     </div>
 
     <div class="p">
@@ -105,6 +114,30 @@ textarea.alta{min-height:132px}
         <button type="button" class="op" data-v="Uso de vez em quando">Uso de vez em quando</button>
         <button type="button" class="op" data-v="Uso quase todo dia">Uso quase todo dia</button>
       </div>
+    </div>
+
+    <div class="p">
+      <label class="q" for="aprender">O que você está mais ansiosa e quer aprender nesses dois dias?</label>
+      <span class="aj livre">Escreve do jeito que vier na cabeça, e o quanto você quiser. Se você comprou pensando em alguma coisa específica, me conta aqui.</span>
+      <textarea id="aprender" class="alta" placeholder="Eu comprei a imersão pensando em..."></textarea>
+    </div>
+
+    <div class="p">
+      <label class="q" for="trava">Onde você trava hoje pra fechar trabalho?</label>
+      <span class="aj livre">O que mais te atrapalha hoje no mercado, com as suas palavras.</span>
+      <textarea id="trava" class="alta" placeholder="O que mais me trava hoje é..."></textarea>
+    </div>
+
+    <div class="p">
+      <label class="q" for="duvida">Qual a sua maior dúvida pra amanhã?</label>
+      <span class="aj livre">Pode ser sobre qualquer coisa. As que mais aparecerem eu respondo ao vivo, na aula.</span>
+      <textarea id="duvida" class="alta" placeholder="Minha maior dúvida é..."></textarea>
+    </div>
+
+    <div class="p">
+      <label class="q" for="medo">O que mais te dá medo nesses dois dias?</label>
+      <span class="aj livre">Pode falar de verdade. Saber disso me ajuda a conduzir a aula no seu ritmo.</span>
+      <textarea id="medo" class="alta" placeholder="Meu medo é..."></textarea>
     </div>
 
     <div class="p">
@@ -136,7 +169,7 @@ textarea.alta{min-height:132px}
   var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1mcm1ucXV2d3d1eHJhcWdlbXloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwNDI1NDIsImV4cCI6MjA4NzYxODU0Mn0.zmsi08dV5L1IlXJSr34vOii71w0g0OsD5_5DKio5g-o';
   var CH_ALUNA = 'guia-imersao:aluna';
   var CH_FEITO = 'imersao-pesquisa:respondeu';
-  var escolhas = { ia:'' };
+  var escolhas = { ia:'', computador:'', portfolio:'' };
 
   /* quem já entrou na apostila nesse navegador chega com nome e @ prontos */
   try{
@@ -188,7 +221,12 @@ textarea.alta{min-height:132px}
       p_aprender: document.getElementById('aprender').value.trim(),
       p_duvida: document.getElementById('duvida').value.trim(),
       p_ia: escolhas.ia || '',
-      p_extra: document.getElementById('extra').value.trim()
+      p_extra: document.getElementById('extra').value.trim(),
+      p_nicho: document.getElementById('nicho').value.trim(),
+      p_computador: escolhas.computador || '',
+      p_portfolio: escolhas.portfolio || '',
+      p_trava: document.getElementById('trava').value.trim(),
+      p_medo: document.getElementById('medo').value.trim()
     };
 
     bt.disabled = true; bt.textContent = 'Enviando...';
