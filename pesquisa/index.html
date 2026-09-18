@@ -38,6 +38,7 @@ input[type=text],textarea{width:100%;border:2px solid var(--line);border-radius:
   font-family:var(--fb);font-size:16px;background:var(--cream);color:var(--ink);resize:vertical}
 input[type=text]:focus,textarea:focus{outline:0;border-color:var(--red);background:var(--white)}
 textarea{min-height:92px;line-height:1.45}
+textarea.alta{min-height:132px}
 .dupla{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media (max-width:460px){.dupla{grid-template-columns:1fr}}
 
@@ -73,7 +74,7 @@ textarea{min-height:92px;line-height:1.45}
   <form id="form" novalidate>
     <div class="selo">Imersão Claude pra Creator · 19 e 20 de setembro</div>
     <h1>Me conta <em>onde você está</em> hoje.</h1>
-    <p class="intro">São dois minutinhos. Eu leio tudo hoje à noite e uso as respostas pra ajustar a aula pra vocês. Prometo responder ao vivo as dúvidas que mais aparecerem.</p>
+    <p class="intro">Escreve à vontade, sem pressa e sem formalidade. Eu leio tudo hoje à noite e uso as respostas pra ajustar a aula pra vocês. Se você comprou esperando alguma coisa específica, é aqui que eu preciso saber.</p>
 
     <div class="p">
       <span class="q">Quem é você? <span class="obrig">obrigatório</span></span>
@@ -85,52 +86,15 @@ textarea{min-height:92px;line-height:1.45}
     </div>
 
     <div class="p">
-      <span class="q">Em que momento você está?</span>
-      <span class="aj">Escolhe a que mais parece com você hoje.</span>
-      <div class="opcoes" data-campo="momento" data-uma="1">
-        <button type="button" class="op" data-v="Começando agora"><span class="em">🌱</span>Começando agora</button>
-        <button type="button" class="op" data-v="Já fiz alguns trabalhos"><span class="em">🎬</span>Já fiz alguns trabalhos</button>
-        <button type="button" class="op" data-v="Já vivo disso"><span class="em">💼</span>Já vivo disso</button>
-        <button type="button" class="op" data-v="Venho de outra área"><span class="em">🔁</span>Venho de outra área</button>
-      </div>
-    </div>
-
-    <div class="p">
-      <span class="q">Quantas marcas você já fechou?</span>
-      <span class="aj">Pode ser permuta também, vale tudo.</span>
-      <div class="opcoes" data-campo="fechados" data-uma="1">
-        <button type="button" class="op" data-v="Nenhuma ainda">Nenhuma ainda</button>
-        <button type="button" class="op" data-v="1 a 3">1 a 3</button>
-        <button type="button" class="op" data-v="4 a 10">4 a 10</button>
-        <button type="button" class="op" data-v="Mais de 10">Mais de 10</button>
-      </div>
-    </div>
-
-    <div class="p">
-      <span class="q">O que mais trava você hoje?</span>
-      <span class="aj">Pode marcar quantas quiser. É a pergunta mais importante daqui.</span>
-      <div class="opcoes" data-campo="dificuldades">
-        <button type="button" class="op" data-v="Não sei onde encontrar marcas"><span class="em">🔎</span>Não sei onde encontrar marcas</button>
-        <button type="button" class="op" data-v="Não sei quanto cobrar"><span class="em">💰</span>Não sei quanto cobrar</button>
-        <button type="button" class="op" data-v="Não tenho portfólio bom pra mandar"><span class="em">📄</span>Não tenho portfólio bom</button>
-        <button type="button" class="op" data-v="Mando proposta e ninguém responde"><span class="em">📭</span>Mando proposta e ninguém responde</button>
-        <button type="button" class="op" data-v="Não sei gravar ou roteirizar"><span class="em">🎥</span>Não sei gravar ou roteirizar</button>
-        <button type="button" class="op" data-v="Falta tempo e organização"><span class="em">⏰</span>Falta tempo e organização</button>
-        <button type="button" class="op" data-v="Medo de me expor"><span class="em">😬</span>Medo de me expor</button>
-        <button type="button" class="op" data-v="A parte técnica me assusta"><span class="em">🧩</span>A parte técnica me assusta</button>
-      </div>
-    </div>
-
-    <div class="p">
-      <label class="q" for="aprender">O que você mais quer aprender nesses dois dias?</label>
-      <span class="aj livre">Escreve do jeito que vier na cabeça.</span>
-      <textarea id="aprender" placeholder="Eu quero muito aprender..."></textarea>
+      <label class="q" for="aprender">O que você está mais ansiosa e quer aprender nesses dois dias?</label>
+      <span class="aj livre">Escreve do jeito que vier na cabeça, e o quanto você quiser. Se você comprou pensando em alguma coisa específica, me conta aqui.</span>
+      <textarea id="aprender" class="alta" placeholder="Eu comprei a imersão pensando em..."></textarea>
     </div>
 
     <div class="p">
       <label class="q" for="duvida">Qual a sua maior dúvida pra amanhã?</label>
-      <span class="aj livre">As que mais aparecerem eu respondo ao vivo, na aula.</span>
-      <textarea id="duvida" placeholder="Minha dúvida é..."></textarea>
+      <span class="aj livre">Pode ser sobre qualquer coisa. As que mais aparecerem eu respondo ao vivo, na aula.</span>
+      <textarea id="duvida" class="alta" placeholder="Minha maior dúvida é..."></textarea>
     </div>
 
     <div class="p">
@@ -144,9 +108,9 @@ textarea{min-height:92px;line-height:1.45}
     </div>
 
     <div class="p">
-      <label class="q" for="extra">Quer me contar mais alguma coisa?</label>
-      <span class="aj livre">Opcional. Pode ser um medo, uma meta, o que você espera daqui.</span>
-      <textarea id="extra" placeholder="Opcional"></textarea>
+      <label class="q" for="extra">O que mais te chamou atenção na imersão?</label>
+      <span class="aj livre">O que te fez comprar, o que você viu e pensou "isso é pra mim". Vale também um medo ou uma meta.</span>
+      <textarea id="extra" class="alta" placeholder="O que me chamou atenção foi..."></textarea>
     </div>
 
     <button type="submit" class="enviar" id="btEnviar">Enviar pra Lara 💛</button>
@@ -172,7 +136,7 @@ textarea{min-height:92px;line-height:1.45}
   var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1mcm1ucXV2d3d1eHJhcWdlbXloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwNDI1NDIsImV4cCI6MjA4NzYxODU0Mn0.zmsi08dV5L1IlXJSr34vOii71w0g0OsD5_5DKio5g-o';
   var CH_ALUNA = 'guia-imersao:aluna';
   var CH_FEITO = 'imersao-pesquisa:respondeu';
-  var escolhas = { momento:'', fechados:'', ia:'', dificuldades:[] };
+  var escolhas = { ia:'' };
 
   /* quem já entrou na apostila nesse navegador chega com nome e @ prontos */
   try{
@@ -218,9 +182,9 @@ textarea{min-height:92px;line-height:1.45}
     var corpo = {
       p_arroba: arroba,
       p_nome: nome || null,
-      p_momento: escolhas.momento || '',
-      p_fechados: escolhas.fechados || '',
-      p_dificuldades: escolhas.dificuldades || [],
+      p_momento: '',
+      p_fechados: '',
+      p_dificuldades: [],
       p_aprender: document.getElementById('aprender').value.trim(),
       p_duvida: document.getElementById('duvida').value.trim(),
       p_ia: escolhas.ia || '',
