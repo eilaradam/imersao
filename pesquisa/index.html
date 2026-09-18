@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Me conta onde você está · Imersão</title>
+<meta name="description" content="Duas perguntas rápidas pra eu ajustar a imersão pra você.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💛</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#C8441A; --red-dark:#A3360F; --ink:#1B1B1B; --cream:#FFF8F2; --cream2:#F3EFE9;
+  --line:#E8E0D8; --muted:#5A5550; --white:#fff; --soft:#FFF0E8; --butter:#FEF7CF; --green:#1C7A4E;
+  --fh:'Montserrat',Arial,sans-serif; --fb:'DM Sans',Arial,sans-serif; --fm:'DM Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--ink);font-family:var(--fb);line-height:1.5;-webkit-font-smoothing:antialiased;
+  -webkit-text-size-adjust:100%}
+#grao{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.tela{position:relative;z-index:1;max-width:580px;margin:0 auto;padding:30px 18px 70px}
+
+.selo{display:inline-block;background:var(--ink);color:var(--white);font-family:var(--fm);font-size:10.5px;
+  letter-spacing:.16em;text-transform:uppercase;padding:7px 12px;border-radius:100px}
+h1{font-family:var(--fh);font-weight:900;font-size:clamp(28px,7.4vw,40px);line-height:1.06;letter-spacing:-.025em;margin:16px 0 10px}
+h1 em{font-style:normal;color:var(--red)}
+.intro{color:var(--muted);font-size:16px}
+
+.p{background:var(--white);border:1px solid var(--line);border-radius:13px;padding:19px 17px;margin-top:16px;
+  box-shadow:0 3px 0 rgba(27,27,27,.06)}
+.p > label.q,.p .q{display:block;font-family:var(--fh);font-weight:800;font-size:16.5px;letter-spacing:-.01em;margin-bottom:3px}
+.p .aj{display:block;color:var(--muted);font-size:13.5px;margin-bottom:13px}
+.p .aj.livre{margin-bottom:11px}
+.obrig{color:var(--red);font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+
+input[type=text],textarea{width:100%;border:2px solid var(--line);border-radius:10px;padding:13px 14px;
+  font-family:var(--fb);font-size:16px;background:var(--cream);color:var(--ink);resize:vertical}
+input[type=text]:focus,textarea:focus{outline:0;border-color:var(--red);background:var(--white)}
+textarea{min-height:92px;line-height:1.45}
+.dupla{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:460px){.dupla{grid-template-columns:1fr}}
+
+.opcoes{display:flex;flex-wrap:wrap;gap:8px}
+.op{border:2px solid var(--line);background:var(--cream);border-radius:100px;padding:10px 15px;
+  font-family:var(--fb);font-weight:600;font-size:14.5px;color:var(--ink);cursor:pointer;
+  transition:background .14s,border-color .14s,color .14s;-webkit-tap-highlight-color:transparent}
+.op:hover{border-color:var(--red)}
+.op.on{background:var(--red);border-color:var(--red);color:#fff}
+.op .em{margin-right:6px}
+
+.enviar{width:100%;margin-top:22px;background:var(--red);color:#fff;border:0;border-radius:12px;padding:17px 20px;
+  font-family:var(--fh);font-weight:800;font-size:17px;cursor:pointer;box-shadow:0 4px 0 var(--red-dark);transition:transform .12s}
+.enviar:active{transform:translateY(2px);box-shadow:0 2px 0 var(--red-dark)}
+.enviar[disabled]{opacity:.65;cursor:default}
+.erro{color:var(--red);font-size:14.5px;margin-top:12px;display:none;font-weight:600}
+.erro.on{display:block}
+.rodape{margin-top:26px;text-align:center;color:var(--muted);font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+
+#fim{display:none;text-align:center;padding:40px 6px}
+#fim.on{display:block}
+#fim .ic{font-size:58px;line-height:1}
+#fim h2{font-family:var(--fh);font-weight:900;font-size:30px;margin:14px 0 10px;letter-spacing:-.02em}
+#fim p{color:var(--muted);font-size:16px;max-width:38ch;margin:0 auto}
+#fim .links{margin-top:26px;display:flex;flex-direction:column;gap:9px;align-items:center}
+#fim a{font-family:var(--fh);font-weight:700;font-size:15px;color:var(--red);text-decoration:underline;text-underline-offset:4px}
+</style>
+</head>
+<body>
+<div id="grao"></div>
+
+<main class="tela">
+  <form id="form" novalidate>
+    <div class="selo">Imersão Claude pra Creator · 19 e 20 de setembro</div>
+    <h1>Me conta <em>onde você está</em> hoje.</h1>
+    <p class="intro">São dois minutinhos. Eu leio tudo hoje à noite e uso as respostas pra ajustar a aula pra vocês. Prometo responder ao vivo as dúvidas que mais aparecerem.</p>
+
+    <div class="p">
+      <span class="q">Quem é você? <span class="obrig">obrigatório</span></span>
+      <span class="aj">Pra eu saber de quem é cada resposta e te chamar pelo nome.</span>
+      <div class="dupla">
+        <input type="text" id="nome" placeholder="Seu nome" autocomplete="name">
+        <input type="text" id="arroba" placeholder="@ do seu Instagram" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="p">
+      <span class="q">Em que momento você está?</span>
+      <span class="aj">Escolhe a que mais parece com você hoje.</span>
+      <div class="opcoes" data-campo="momento" data-uma="1">
+        <button type="button" class="op" data-v="Começando agora"><span class="em">🌱</span>Começando agora</button>
+        <button type="button" class="op" data-v="Já fiz alguns trabalhos"><span class="em">🎬</span>Já fiz alguns trabalhos</button>
+        <button type="button" class="op" data-v="Já vivo disso"><span class="em">💼</span>Já vivo disso</button>
+        <button type="button" class="op" data-v="Venho de outra área"><span class="em">🔁</span>Venho de outra área</button>
+      </div>
+    </div>
+
+    <div class="p">
+      <span class="q">Quantas marcas você já fechou?</span>
+      <span class="aj">Pode ser permuta também, vale tudo.</span>
+      <div class="opcoes" data-campo="fechados" data-uma="1">
+        <button type="button" class="op" data-v="Nenhuma ainda">Nenhuma ainda</button>
+        <button type="button" class="op" data-v="1 a 3">1 a 3</button>
+        <button type="button" class="op" data-v="4 a 10">4 a 10</button>
+        <button type="button" class="op" data-v="Mais de 10">Mais de 10</button>
+      </div>
+    </div>
+
+    <div class="p">
+      <span class="q">O que mais trava você hoje?</span>
+      <span class="aj">Pode marcar quantas quiser. É a pergunta mais importante daqui.</span>
+      <div class="opcoes" data-campo="dificuldades">
+        <button type="button" class="op" data-v="Não sei onde encontrar marcas"><span class="em">🔎</span>Não sei onde encontrar marcas</button>
+        <button type="button" class="op" data-v="Não sei quanto cobrar"><span class="em">💰</span>Não sei quanto cobrar</button>
+        <button type="button" class="op" data-v="Não tenho portfólio bom pra mandar"><span class="em">📄</span>Não tenho portfólio bom</button>
+        <button type="button" class="op" data-v="Mando proposta e ninguém responde"><span class="em">📭</span>Mando proposta e ninguém responde</button>
+        <button type="button" class="op" data-v="Não sei gravar ou roteirizar"><span class="em">🎥</span>Não sei gravar ou roteirizar</button>
+        <button type="button" class="op" data-v="Falta tempo e organização"><span class="em">⏰</span>Falta tempo e organização</button>
+        <button type="button" class="op" data-v="Medo de me expor"><span class="em">😬</span>Medo de me expor</button>
+        <button type="button" class="op" data-v="A parte técnica me assusta"><span class="em">🧩</span>A parte técnica me assusta</button>
+      </div>
+    </div>
+
+    <div class="p">
+      <label class="q" for="aprender">O que você mais quer aprender nesses dois dias?</label>
+      <span class="aj livre">Escreve do jeito que vier na cabeça.</span>
+      <textarea id="aprender" placeholder="Eu quero muito aprender..."></textarea>
+    </div>
+
+    <div class="p">
+      <label class="q" for="duvida">Qual a sua maior dúvida pra amanhã?</label>
+      <span class="aj livre">As que mais aparecerem eu respondo ao vivo, na aula.</span>
+      <textarea id="duvida" placeholder="Minha dúvida é..."></textarea>
+    </div>
+
+    <div class="p">
+      <span class="q">Você já usa inteligência artificial no seu trabalho?</span>
+      <span class="aj">Sem julgamento, é só pra eu saber o ponto de partida da turma.</span>
+      <div class="opcoes" data-campo="ia" data-uma="1">
+        <button type="button" class="op" data-v="Nunca usei">Nunca usei</button>
+        <button type="button" class="op" data-v="Uso de vez em quando">Uso de vez em quando</button>
+        <button type="button" class="op" data-v="Uso quase todo dia">Uso quase todo dia</button>
+      </div>
+    </div>
+
+    <div class="p">
+      <label class="q" for="extra">Quer me contar mais alguma coisa?</label>
+      <span class="aj livre">Opcional. Pode ser um medo, uma meta, o que você espera daqui.</span>
+      <textarea id="extra" placeholder="Opcional"></textarea>
+    </div>
+
+    <button type="submit" class="enviar" id="btEnviar">Enviar pra Lara 💛</button>
+    <p class="erro" id="erro"></p>
+    <p class="rodape">@eilaradam · suas respostas só eu vejo</p>
+  </form>
+
+  <section id="fim">
+    <div class="ic">💛</div>
+    <h2>Recebi, obrigada!</h2>
+    <p>Eu vou ler tudo hoje à noite e levar as dúvidas mais comuns pra aula. Te vejo amanhã às 9h.</p>
+    <div class="links">
+      <a href="https://eilaradam.github.io/imersao/">Ver tudo da imersão</a>
+      <a href="#" id="denovo">Mudar a minha resposta</a>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var SB_URL = 'https://mfrmnquvwwuxraqgemyh.supabase.co';
+  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1mcm1ucXV2d3d1eHJhcWdlbXloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwNDI1NDIsImV4cCI6MjA4NzYxODU0Mn0.zmsi08dV5L1IlXJSr34vOii71w0g0OsD5_5DKio5g-o';
+  var CH_ALUNA = 'guia-imersao:aluna';
+  var CH_FEITO = 'imersao-pesquisa:respondeu';
+  var escolhas = { momento:'', fechados:'', ia:'', dificuldades:[] };
+
+  /* quem já entrou na apostila nesse navegador chega com nome e @ prontos */
+  try{
+    var eu = JSON.parse(localStorage.getItem(CH_ALUNA) || 'null');
+    if(eu){
+      if(eu.nome) document.getElementById('nome').value = eu.nome;
+      if(eu.arroba) document.getElementById('arroba').value = '@' + eu.arroba;
+    }
+  }catch(e){}
+
+  /* chips: um grupo escolhe uma, outro escolhe várias */
+  [].slice.call(document.querySelectorAll('.opcoes')).forEach(function(grupo){
+    var campo = grupo.dataset.campo, uma = grupo.dataset.uma === '1';
+    [].slice.call(grupo.querySelectorAll('.op')).forEach(function(bt){
+      bt.addEventListener('click', function(){
+        if(uma){
+          [].slice.call(grupo.querySelectorAll('.op')).forEach(function(o){ o.classList.toggle('on', o === bt); });
+          escolhas[campo] = bt.dataset.v;
+        } else {
+          bt.classList.toggle('on');
+          var lista = [];
+          [].slice.call(grupo.querySelectorAll('.op.on')).forEach(function(o){ lista.push(o.dataset.v); });
+          escolhas[campo] = lista;
+        }
+      });
+    });
+  });
+
+  var form = document.getElementById('form'), fim = document.getElementById('fim'),
+      erro = document.getElementById('erro'), bt = document.getElementById('btEnviar');
+
+  function avisa(txt){ erro.textContent = txt; erro.classList.add('on'); }
+
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    erro.classList.remove('on');
+
+    var nome = document.getElementById('nome').value.trim().replace(/\s+/g,' ');
+    var arroba = document.getElementById('arroba').value.trim().toLowerCase()
+                   .replace(/^@+/,'').replace(/[^a-z0-9._]/g,'');
+    if(arroba.length < 2){ avisa('Coloca o @ do seu Instagram, é por ele que eu te acho 💛'); return; }
+
+    var corpo = {
+      p_arroba: arroba,
+      p_nome: nome || null,
+      p_momento: escolhas.momento || '',
+      p_fechados: escolhas.fechados || '',
+      p_dificuldades: escolhas.dificuldades || [],
+      p_aprender: document.getElementById('aprender').value.trim(),
+      p_duvida: document.getElementById('duvida').value.trim(),
+      p_ia: escolhas.ia || '',
+      p_extra: document.getElementById('extra').value.trim()
+    };
+
+    bt.disabled = true; bt.textContent = 'Enviando...';
+    fetch(SB_URL + '/rest/v1/rpc/imersao_salvar_pesquisa', {
+      method: 'POST',
+      headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify(corpo)
+    }).then(function(r){
+      if(!r.ok) throw new Error('resposta ' + r.status);
+      try{ localStorage.setItem(CH_FEITO, arroba); }catch(e){}
+      form.style.display = 'none';
+      fim.classList.add('on');
+      window.scrollTo(0,0);
+    }).catch(function(){
+      bt.disabled = false; bt.textContent = 'Enviar pra Lara 💛';
+      avisa('Não consegui enviar agora. Confere a internet e tenta de novo, ou me manda no direct.');
+    });
+  });
+
+  document.getElementById('denovo').addEventListener('click', function(ev){
+    ev.preventDefault();
+    fim.classList.remove('on');
+    form.style.display = '';
+    bt.disabled = false; bt.textContent = 'Enviar pra Lara 💛';
+    window.scrollTo(0,0);
+  });
+})();
+</script>
+</body>
+</html>
