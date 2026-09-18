@@ -85,6 +85,24 @@ h1 em{font-style:normal;color:var(--red)}
 .ajuda a{color:var(--butter)}
 .rodape{margin-top:34px;text-align:center;color:var(--muted);font-family:var(--fm);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
 
+/* ---------- tranca de horário: só abre na hora da aula ---------- */
+#espera{position:fixed;inset:0;z-index:60;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;
+  padding:24px;text-align:center}
+#espera.fora{display:none}
+.esp{max-width:520px;width:100%}
+.esp .selo{background:var(--ink);color:#fff}
+.esp h1{font-family:var(--fh);font-weight:900;font-size:clamp(30px,7vw,52px);line-height:1.04;letter-spacing:-.025em;margin:18px 0 12px;color:#fff}
+.esp h1 em{font-style:normal;color:var(--butter)}
+.esp p{font-size:clamp(15px,2vw,18px);color:rgba(255,255,255,.9);max-width:42ch;margin:0 auto}
+.esp .relogio{display:flex;justify-content:center;gap:10px;margin:26px 0 24px}
+.esp .caixa{background:rgba(0,0,0,.22);border-radius:12px;padding:12px 16px;min-width:78px}
+.esp .caixa b{display:block;font-family:var(--fh);font-weight:900;font-size:clamp(26px,6vw,38px);line-height:1}
+.esp .caixa span{font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.8}
+.esp .bt{display:inline-block;margin-top:6px;background:var(--cream);color:var(--red);text-decoration:none;
+  font-family:var(--fh);font-weight:800;font-size:16px;padding:15px 26px;border-radius:12px;box-shadow:0 4px 0 rgba(0,0,0,.25)}
+.esp .bt:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.25)}
+.esp .rodape{margin-top:22px;color:rgba(255,255,255,.75);font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+
 /* ---------- porteira ---------- */
 #portao{position:fixed;inset:0;z-index:50;background:var(--red);display:flex;align-items:center;justify-content:center;padding:22px;transition:opacity .35s,visibility .35s}
 #portao.fora{opacity:0;visibility:hidden}
@@ -110,6 +128,18 @@ h1 em{font-style:normal;color:var(--red)}
 </head>
 <body>
 <div id="grao"></div>
+
+<div id="espera">
+  <div class="esp">
+    <div class="selo">Imersão Claude pra Creator · Turma 2</div>
+    <h1>A gente começa <em>amanhã, 9h.</em></h1>
+    <p>Tudo o que a gente vai usar nos dois dias aparece aqui nesta página, no sábado de manhã. Salva o link e não se preocupa com mais nada hoje.</p>
+    <div class="relogio" id="relogio"></div>
+    <p style="margin-bottom:18px"><strong>Hoje só tem uma coisa pra fazer:</strong> me contar o que você espera da imersão.</p>
+    <a class="bt" href="pesquisa/">Responder o formulário 💛</a>
+    <p class="rodape">@eilaradam</p>
+  </div>
+</div>
 
 <div id="portao">
   <div class="pcaixa">
@@ -255,6 +285,33 @@ h1 em{font-style:normal;color:var(--red)}
 </main>
 
 <script>
+/* A central só abre na hora da aula. Antes disso, a tela de espera cobre tudo
+   e a única coisa viva é o link do formulário. Pra conferir antes, acrescenta
+   ?abrir no fim do endereço. */
+(function(){
+  var ABRE = new Date('2026-09-19T09:00:00-03:00').getTime();
+  var espera = document.getElementById('espera');
+  var relogio = document.getElementById('relogio');
+  var forcado = /[?&]abrir/.test(location.search);
+
+  function liberado(){ return forcado || Date.now() >= ABRE; }
+  function duas(n){ return (n < 10 ? '0' : '') + n; }
+
+  function conta(){
+    if(liberado()){ espera.classList.add('fora'); return; }
+    var falta = Math.max(0, ABRE - Date.now());
+    var h = Math.floor(falta / 3600000);
+    var m = Math.floor(falta % 3600000 / 60000);
+    var s = Math.floor(falta % 60000 / 1000);
+    relogio.innerHTML =
+      '<div class="caixa"><b>' + duas(h) + '</b><span>horas</span></div>' +
+      '<div class="caixa"><b>' + duas(m) + '</b><span>min</span></div>' +
+      '<div class="caixa"><b>' + duas(s) + '</b><span>seg</span></div>';
+    setTimeout(conta, 1000);
+  }
+  conta();
+})();
+
 (function(){
   var portao = document.getElementById('portao');
   function liberado(){ try{ return localStorage.getItem('imersaoOk') === '1'; }catch(e){ return false; } }
