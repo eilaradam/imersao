@@ -78,12 +78,12 @@ textarea.alta{min-height:132px}
 
     <div class="p">
       <span class="q">Quem é você? <span class="obrig">obrigatório</span></span>
-      <span class="aj">Pra eu saber de quem é cada resposta e te chamar pelo nome.</span>
+      <span class="aj">Pra eu saber de quem é cada resposta, te chamar pelo nome e falar com você se precisar.</span>
       <div class="dupla">
         <input type="text" id="nome" placeholder="Seu nome" autocomplete="name">
         <input type="text" id="arroba" placeholder="@ do seu Instagram" autocomplete="off">
       </div>
-      <input type="text" id="nicho" placeholder="Seu nicho (casa, beleza, pet, comida...)" autocomplete="off" style="margin-top:10px">
+      <input type="tel" id="zap" placeholder="Seu WhatsApp com DDD" autocomplete="tel" inputmode="numeric" style="margin-top:10px">
     </div>
 
     <div class="p">
@@ -167,6 +167,7 @@ textarea.alta{min-height:132px}
     if(eu){
       if(eu.nome) document.getElementById('nome').value = eu.nome;
       if(eu.arroba) document.getElementById('arroba').value = '@' + eu.arroba;
+      if(eu.whatsapp) document.getElementById('zap').value = eu.whatsapp;
     }
   }catch(e){}
 
@@ -212,7 +213,7 @@ textarea.alta{min-height:132px}
       p_duvida: document.getElementById('duvida').value.trim(),
       p_ia: escolhas.ia || '',
       p_extra: document.getElementById('extra').value.trim(),
-      p_nicho: document.getElementById('nicho').value.trim(),
+      p_whatsapp: document.getElementById('zap').value.replace(/[^0-9]/g, ''),
       p_portfolio: escolhas.portfolio || '',
       p_trava: document.getElementById('trava').value.trim(),
       p_medo: document.getElementById('medo').value.trim()
