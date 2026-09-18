@@ -87,16 +87,6 @@ textarea.alta{min-height:132px}
     </div>
 
     <div class="p">
-      <span class="q">Você vai acompanhar de computador?</span>
-      <span class="aj">Isso é importante: a gente vai construir o seu site ao vivo, e isso é feito no computador.</span>
-      <div class="opcoes" data-campo="computador" data-uma="1">
-        <button type="button" class="op" data-v="Tenho o meu"><span class="em">💻</span>Tenho o meu</button>
-        <button type="button" class="op" data-v="Vou usar emprestado"><span class="em">🤝</span>Vou usar emprestado</button>
-        <button type="button" class="op" data-v="Só tenho celular"><span class="em">📱</span>Só tenho celular</button>
-      </div>
-    </div>
-
-    <div class="p">
       <span class="q">Você já tem portfólio hoje?</span>
       <span class="aj">Pra eu saber de onde cada uma está partindo.</span>
       <div class="opcoes" data-campo="portfolio" data-uma="1">
@@ -169,7 +159,7 @@ textarea.alta{min-height:132px}
   var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1mcm1ucXV2d3d1eHJhcWdlbXloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwNDI1NDIsImV4cCI6MjA4NzYxODU0Mn0.zmsi08dV5L1IlXJSr34vOii71w0g0OsD5_5DKio5g-o';
   var CH_ALUNA = 'guia-imersao:aluna';
   var CH_FEITO = 'imersao-pesquisa:respondeu';
-  var escolhas = { ia:'', computador:'', portfolio:'' };
+  var escolhas = { ia:'', portfolio:'' };
 
   /* quem já entrou na apostila nesse navegador chega com nome e @ prontos */
   try{
@@ -223,7 +213,6 @@ textarea.alta{min-height:132px}
       p_ia: escolhas.ia || '',
       p_extra: document.getElementById('extra').value.trim(),
       p_nicho: document.getElementById('nicho').value.trim(),
-      p_computador: escolhas.computador || '',
       p_portfolio: escolhas.portfolio || '',
       p_trava: document.getElementById('trava').value.trim(),
       p_medo: document.getElementById('medo').value.trim()
